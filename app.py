@@ -100,3 +100,42 @@ def validar_vendidos(vendidos):
     if vendidos >= 0:
         return True
     return False
+
+def stock_categoria(categoria, productos, inventario):
+    total = 0
+
+    for codigo in productos:
+        if productos[codigo][1].lower() == categoria.lower():
+            total = total + inventario[codigo][0]
+
+    print("Stock total de la categoría:", total)
+
+
+def buscar_precio(precio_min, precio_max, productos, inventario):
+    lista = []
+
+    for codigo in productos:
+        precio = productos[codigo][2]
+        stock = inventario[codigo][0]
+
+        if precio >= precio_min and precio <= precio_max and stock > 0:
+            nombre = productos[codigo][0]
+            lista.append(nombre + "--" + codigo)
+
+    lista.sort()
+
+    if len(lista) == 0:
+        print("No existen productos en ese rango")
+    else:
+        for producto in lista:
+            print(producto)
+
+
+def actualizar_precio(codigo, nuevo_precio, productos):
+    codigo_real = obtener_codigo(codigo, productos)
+
+    if codigo_real == "":
+        return False
+    else:
+        productos[codigo_real][2] = nuevo_precio
+        return True

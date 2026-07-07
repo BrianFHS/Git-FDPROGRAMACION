@@ -74,14 +74,29 @@ def validar_nombre(nombre):
         return False
     return True
 
-
 def validar_categoria(categoria):
     if categoria.strip() == "":
         return False
     return True
 
-
 def validar_precio(precio):
     if precio > 0:
+        return True
+    return False
+
+def validar_disponible(opcion):
+    if opcion.lower() == "s" or opcion.lower() == "n":
+        return True
+    return False
+
+
+def validar_stock(stock):
+    if stock >= 0:
+        return True
+    return False
+
+
+def validar_vendidos(vendidos):
+    if vendidos >= 0:
         return True
     return False

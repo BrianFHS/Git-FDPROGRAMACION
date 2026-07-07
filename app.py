@@ -161,7 +161,10 @@ def mostrar_productos(productos, inventario):
         print("Nombre:", productos[codigo][0])
         print("Categoría:", productos[codigo][1])
         print("Precio: $" + str(productos[codigo][2]))
-        print("Disponible:", productos[codigo][3])
+        if productos[codigo][3]:
+            print("Disponible: Sí")
+        else:
+            print("Disponible: No")
         print("Stock:", inventario[codigo][0])
         print("Vendidos:", inventario[codigo][1])
         print("--------------------------")

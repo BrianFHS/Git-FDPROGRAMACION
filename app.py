@@ -24,3 +24,47 @@ def leer_opcion():
             print("Debe seleccionar una opción válida")
 
 
+def leer_numero_mayor_cero(mensaje):
+    while True:
+        try:
+            numero = int(input(mensaje))
+            if numero > 0:
+                return numero
+            else:
+                print("Debe ser mayor que cero")
+        except:
+            print("Debe ingresar un número entero")
+
+
+def leer_numero_cero_o_mayor(mensaje):
+    while True:
+        try:
+            numero = int(input(mensaje))
+            if numero >= 0:
+                return numero
+            else:
+                print("Debe ser mayor o igual a cero")
+        except:
+            print("Debe ingresar un número entero")
+
+
+def buscar_codigo(codigo, productos):
+    for cod in productos:
+        if cod.lower() == codigo.lower():
+            return True
+    return False
+
+
+def obtener_codigo(codigo, productos):
+    for cod in productos:
+        if cod.lower() == codigo.lower():
+            return cod
+    return ""
+
+
+def validar_codigo(codigo, productos):
+    if codigo.strip() == "":
+        return False
+    if buscar_codigo(codigo, productos):
+        return False
+    return True

@@ -68,3 +68,20 @@ def validar_codigo(codigo, productos):
     if buscar_codigo(codigo, productos):
         return False
     return True
+
+def validar_nombre(nombre):
+    if nombre.strip() == "":
+        return False
+    return True
+
+
+def validar_categoria(categoria):
+    if categoria.strip() == "":
+        return False
+    return True
+
+
+def validar_precio(precio):
+    if precio > 0:
+        return True
+    return False

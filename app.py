@@ -89,12 +89,10 @@ def validar_disponible(opcion):
         return True
     return False
 
-
 def validar_stock(stock):
     if stock >= 0:
         return True
     return False
-
 
 def validar_vendidos(vendidos):
     if vendidos >= 0:
@@ -109,7 +107,6 @@ def stock_categoria(categoria, productos, inventario):
             total = total + inventario[codigo][0]
 
     print("Stock total de la categoría:", total)
-
 
 def buscar_precio(precio_min, precio_max, productos, inventario):
     lista = []
@@ -130,7 +127,6 @@ def buscar_precio(precio_min, precio_max, productos, inventario):
         for producto in lista:
             print(producto)
 
-
 def actualizar_precio(codigo, nuevo_precio, productos):
     codigo_real = obtener_codigo(codigo, productos)
 
@@ -139,3 +135,22 @@ def actualizar_precio(codigo, nuevo_precio, productos):
     else:
         productos[codigo_real][2] = nuevo_precio
         return True
+
+def agregar_producto(codigo, nombre, categoria, precio, disponible, stock, vendidos, productos, inventario):
+    if buscar_codigo(codigo, productos):
+        return False
+    else:
+        productos[codigo] = [nombre, categoria, precio, disponible]
+        inventario[codigo] = [stock, vendidos]
+        return True
+
+def eliminar_producto(codigo, productos, inventario):
+    codigo_real = obtener_codigo(codigo, productos)
+
+    if codigo_real == "":
+        return False
+    else:
+        del productos[codigo_real]
+        del inventario[codigo_real]
+        return True
+

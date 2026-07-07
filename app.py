@@ -165,3 +165,102 @@ def mostrar_productos(productos, inventario):
         print("Stock:", inventario[codigo][0])
         print("Vendidos:", inventario[codigo][1])
         print("--------------------------")
+
+def main():
+    productos = {
+        "P101": ["Cuaderno", "Papelería", 2490, True],
+        "P102": ["Lápiz", "Papelería", 590, True],
+        "P103": ["Botella", "Accesorios", 6990, False],
+        "P104": ["Mochila", "Accesorios", 24990, True]
+    }
+
+    inventario = {
+        "P101": [30, 15],
+        "P102": [120, 50],
+        "P103": [0, 10],
+        "P104": [8, 25]
+    }
+
+    opcion = 0
+
+    while opcion != 7:
+        mostrar_menu()
+        opcion = leer_opcion()
+
+        if opcion == 1:
+            categoria = input("Ingrese categoría: ")
+            stock_categoria(categoria, productos, inventario)
+
+        elif opcion == 2:
+            minimo = leer_numero_mayor_cero("Ingrese precio mínimo: ")
+            maximo = leer_numero_mayor_cero("Ingrese precio máximo: ")
+            buscar_precio(minimo, maximo, productos, inventario)
+
+        elif opcion == 3:
+            seguir = "s"
+
+            while seguir.lower() == "s":
+                codigo = input("Ingrese código: ")
+
+                if buscar_codigo(codigo, productos):
+                    precio = leer_numero_mayor_cero("Ingrese nuevo precio: ")
+
+                    if actualizar_precio(codigo, precio, productos):
+                        print("Precio actualizado")
+                else:
+                    print("Código inexistente")
+
+                seguir = input("¿Desea continuar? s/n: ")
+
+        elif opcion == 4:
+            codigo = input("Ingrese código: ")
+            while validar_codigo(codigo, productos) == False:
+                print("Código inválido")
+                codigo = input("Ingrese código: ")
+
+            nombre = input("Ingrese nombre: ")
+            while validar_nombre(nombre) == False:
+                print("Nombre inválido")
+                nombre = input("Ingrese nombre: ")
+
+            categoria = input("Ingrese categoría: ")
+            while validar_categoria(categoria) == False:
+                print("Categoría inválida")
+                categoria = input("Ingrese categoría: ")
+
+            precio = leer_numero_mayor_cero("Ingrese precio: ")
+
+            disponible_opcion = input("Disponible s/n: ")
+            while validar_disponible(disponible_opcion) == False:
+                print("Opción inválida")
+                disponible_opcion = input("Disponible s/n: ")
+
+            if disponible_opcion.lower() == "s":
+                disponible = True
+            else:
+                disponible = False
+
+            stock = leer_numero_cero_o_mayor("Ingrese stock: ")
+            vendidos = leer_numero_cero_o_mayor("Ingrese vendidos: ")
+
+            if agregar_producto(codigo, nombre, categoria, precio, disponible, stock, vendidos, productos, inventario):
+                print("Producto agregado")
+            else:
+                print("No se pudo agregar")
+
+        elif opcion == 5:
+            codigo = input("Ingrese código a eliminar: ")
+
+            if eliminar_producto(codigo, productos, inventario):
+                print("Producto eliminado")
+            else:
+                print("Código inexistente")
+
+        elif opcion == 6:
+            mostrar_productos(productos, inventario)
+
+        elif opcion == 7:
+            print("Programa finalizado")
+
+
+main()

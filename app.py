@@ -154,3 +154,14 @@ def eliminar_producto(codigo, productos, inventario):
         del inventario[codigo_real]
         return True
 
+def mostrar_productos(productos, inventario):
+    for codigo in productos:
+        print("CODIGO:", codigo)
+        print("--------------------------")
+        print("Nombre:", productos[codigo][0])
+        print("Categoría:", productos[codigo][1])
+        print("Precio: $" + str(productos[codigo][2]))
+        print("Disponible:", productos[codigo][3])
+        print("Stock:", inventario[codigo][0])
+        print("Vendidos:", inventario[codigo][1])
+        print("--------------------------")
